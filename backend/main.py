@@ -3,6 +3,7 @@ import tensorflow as tf
 import numpy as np
 from PIL import Image
 import sqlite3
+import cv2 
 
 app = Flask(__name__)
 
@@ -64,3 +65,9 @@ def upload_image():
     conn.close()
     
     return jsonify(decoded_predictions[0])
+
+def process_image(image_path):
+    image = cv2.imread(image_path)
+    gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    # Further processing...
+    return gray_image
